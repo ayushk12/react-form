@@ -29,8 +29,8 @@ const SignupSchema = Yup.object().shape({
     .required("phone is required"),
 
   address: Yup.string()
-    .min(5, "Minimum 5 words required")
-    .max(10, "must be less than 20 charcter")
+    .min(1, "Minimum 5 words required")
+    .max(1000, "must be less than 20 charcter")
     .required("address is required"),
 
   email: Yup.string().email("Email is invalid").required("Email is required"),
@@ -39,7 +39,6 @@ const SignupSchema = Yup.object().shape({
 
   password: Yup.string()
     .min(6, "Password must be at least 6 characters")
-    // .matches(/[A-Z]{2}\d{2}[A-Z]{2}\d{4}$/i, "invalid Password")
     .required("Password is required"),
   confirmPassword: Yup.string()
     .oneOf([Yup.ref("password"), null], "Passwords must match")
@@ -55,7 +54,7 @@ class App extends React.Component {
         validationSchema={SignupSchema}
         onSubmit={(values, { resetForm }) => {
           console.log(values);
-          alert("SUCCESS!! :-)\n\n" + JSON.stringify(formStructure));
+          alert("SUCCESS!! :-)\n\n");
           resetForm(values, "");
         }}
       >
@@ -102,25 +101,25 @@ class App extends React.Component {
                   (errors.phone && touched.phone ? " is-invalid" : "")
                 }
               />
-              <div className="form-group">
-                <label htmlFor="address">Address</label>
-                <Field
-                  name="address"
-                  type="text"
-                  className={
-                    "form-control" +
-                    (errors.email && touched.email ? " is-invalid" : "")
-                  }
-                />
-                <ErrorMessage
-                  name="address"
-                  component="div"
-                  className="invalid-feedback"
-                />
-              </div>
-
               <ErrorMessage
-                name="email"
+                name="phone"
+                component="div"
+                className="invalid-feedback"
+              />
+            </div>
+
+            <div className="form-group">
+              <label htmlFor="address">Address</label>
+              <Field
+                name="address"
+                type="text"
+                className={
+                  "form-control" +
+                  (errors.email && touched.email ? " is-invalid" : "")
+                }
+              />
+              <ErrorMessage
+                name="address"
                 component="div"
                 className="invalid-feedback"
               />
