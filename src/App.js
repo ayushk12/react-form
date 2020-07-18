@@ -54,7 +54,10 @@ const SignupSchema = Yup.object().shape({
   educationDegree: Yup.string()
     .required("its is required")
     .min(2, "atleast 2 words any degree"),
-  skills: Yup.mixed().required("it is required"),
+  skills: Yup.string()
+    .required("it is required")
+    .min(3, "atleast 3 skills reuired")
+    .max(6, "atmost 6 skills required"),
 
   picture: Yup.mixed().required("A image is required"),
   // .test(
